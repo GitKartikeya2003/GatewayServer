@@ -12,7 +12,7 @@ spring:
         webflux:
           discovery:
             locator:
-              enabled: true
+              enabled: false
               lower-case-service-id: true #because of this I can set "ACCOUNTS" to "accounts" and same for other services
 
 management:
