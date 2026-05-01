@@ -13,7 +13,7 @@ spring:
           discovery:
             locator:
               enabled: true
-#              lower-case-service-id: true #because of this I can set "ACCOUNTS" to "accounts" and same for other services
+              lower-case-service-id: true #because of this I can set "ACCOUNTS" to "accounts" and same for other services
 
 management:
   endpoints:
