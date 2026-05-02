@@ -7,6 +7,8 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDateTime;
+
 @SpringBootApplication
 @EnableDiscoveryClient
 public class GatewayserverApplication {
@@ -16,20 +18,25 @@ public class GatewayserverApplication {
     }
 
 
-
     //Implementing Custom Routing in Spring Cloud gateway Server
     @Bean
     public RouteLocator BanklyCoreRouteConfig(RouteLocatorBuilder routeLocatorBuilder) {
 
         return routeLocatorBuilder.routes()
                 .route(p -> p.path("/banklycore/accounts/**")
-                        .filters(f -> f.rewritePath("/banklycore/accounts/(?<segment>.*)", "/${segment}")).uri("lb://ACCOUNTS"))
+                        .filters(f -> f.rewritePath("/banklycore/accounts/(?<segment>.*)", "/${segment}")
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+                        .uri("lb://ACCOUNTS"))
 
                 .route(p -> p.path("/banklycore/loans/**")
-                        .filters(f -> f.rewritePath("/banklycore/loans/(?<segment>.*)", "/${segment}")).uri("lb://LOANS"))
+                        .filters(f -> f.rewritePath("/banklycore/loans/(?<segment>.*)", "/${segment}")
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+                        .uri("lb://LOANS"))
 
                 .route(p -> p.path("/banklycore/cards/**")
-                        .filters(f -> f.rewritePath("/banklycore/cards/(?<segment>.*)", "/${segment}")).uri("lb://CARDS")).build();
+                        .filters(f -> f.rewritePath("/banklycore/cards/(?<segment>.*)", "/${segment}")
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+                        .uri("lb://CARDS")).build();
     }
 
 }
