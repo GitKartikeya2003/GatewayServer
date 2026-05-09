@@ -33,6 +33,13 @@ info:
     description: "BanklyCore gateway Server Application"
     version: "1.0.0"
 
+
+logging:
+  level:
+    com:
+      example:
+        gatewayserver: DEBUG
+
 eureka:
   instance:
     preferIpAddress: true

@@ -14,7 +14,9 @@ import java.time.LocalDateTime;
 public class GatewayserverApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(GatewayserverApplication.class, args);
+
     }
 
 
