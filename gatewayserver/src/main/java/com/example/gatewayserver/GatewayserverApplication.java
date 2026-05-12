@@ -28,7 +28,7 @@ public class GatewayserverApplication {
                 .route(p -> p.path("/banklycore/accounts/**")
                         .filters(f -> f.rewritePath("/banklycore/accounts/(?<segment>.*)", "/${segment}")
                                 .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
-                                .circuitBreaker(config -> config.setName("accountsCircuitBreaker")))
+                                .circuitBreaker(config -> config.setName("accountsCircuitBreaker").setFallbackUri("forward:/contact-support")))
                         .uri("lb://ACCOUNTS"))
 
                 .route(p -> p.path("/banklycore/loans/**")
@@ -47,3 +47,6 @@ public class GatewayserverApplication {
     }
 
 }
+//http://localhost:8072/actuator/circuitbreakerevents?name=accountsCircuitBreaker ----> This to know about all the circuit Breaker Events
+
+// http://localhost:8072/actuator/circuitbreakers ---> this to get to know what state cicuit Breaker State is in(Open, Close, Half Open )
