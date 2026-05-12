@@ -48,3 +48,13 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: "http://localhost:8070/eureka/"
+
+
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10   # this tells to make at try 10 request before going from closed to open circuit
+      permittedNumberOfCallsInHalfOpenState: 2  # I want my circuit breaker pattern to try 2 request in the half open circuit state based on  response it will decide what to do whether go to closed state or go to full open state
+      failureRateThreshold: 50  # if ate least 50 percent of the request are failed then move to open circuit state
+      waitDurationInOpenState: 10000 # 10 sec

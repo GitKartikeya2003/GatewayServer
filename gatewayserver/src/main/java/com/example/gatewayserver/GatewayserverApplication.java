@@ -27,17 +27,22 @@ public class GatewayserverApplication {
         return routeLocatorBuilder.routes()
                 .route(p -> p.path("/banklycore/accounts/**")
                         .filters(f -> f.rewritePath("/banklycore/accounts/(?<segment>.*)", "/${segment}")
-                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                                .circuitBreaker(config -> config.setName("accountsCircuitBreaker")))
                         .uri("lb://ACCOUNTS"))
 
                 .route(p -> p.path("/banklycore/loans/**")
                         .filters(f -> f.rewritePath("/banklycore/loans/(?<segment>.*)", "/${segment}")
-                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+                                        .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                                //  .circuitBreaker(config -> config.setName("loansCircuitBreaker"))
+                        )
                         .uri("lb://LOANS"))
 
                 .route(p -> p.path("/banklycore/cards/**")
                         .filters(f -> f.rewritePath("/banklycore/cards/(?<segment>.*)", "/${segment}")
-                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+                                        .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                                //   .circuitBreaker(config -> config.setName("cardsCircuitBreaker"))
+                        )
                         .uri("lb://CARDS")).build();
     }
 
