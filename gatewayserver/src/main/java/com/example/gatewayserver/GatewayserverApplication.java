@@ -49,4 +49,4 @@ public class GatewayserverApplication {
 }
 //http://localhost:8072/actuator/circuitbreakerevents?name=accountsCircuitBreaker ----> This to know about all the circuit Breaker Events
 
-// http://localhost:8072/actuator/circuitbreakers ---> this to get to know what state cicuit Breaker State is in(Open, Close, Half Open )
+// http://localhost:8072/actuator/circuitbreakers ---> this to get to know what state circuit Breaker State is in(Open, Close, Half Open )
