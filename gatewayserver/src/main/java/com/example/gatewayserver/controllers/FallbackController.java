@@ -8,10 +8,8 @@ import reactor.core.publisher.Mono;
 @RestController
 public class FallbackController {
 
-    @RequestMapping("/contactSupport")
-    public Mono<String> contactSupport(){
-
-        return Mono.just("An error occurred . Please try again later");
-
+    @RequestMapping("/contact-support")  // ← change to match the fallbackUri
+    public Mono<String> contactSupport() {
+        return Mono.just("An error occurred. Please try again later.");
     }
 }
