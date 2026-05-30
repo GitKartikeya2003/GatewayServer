@@ -114,3 +114,18 @@ public class GatewayserverApplication {
 
 
 }
+
+
+
+//Aspect order
+//The Resilience4j Aspects order is the following:
+//Retry ( CircuitBreaker ( RateLimiter ( TimeLimiter ( Bulkhead ( Function ) ) ) ) )
+//so Retry is applied at the end (if needed).
+//If you need a different order,
+// you must use the functional chaining style instead of the Spring annotations
+// style or explicitly set aspect order using the following properties in application.yml:
+//resilience4j:
+//circuitbreaker:
+//circuitBreakerAspectOrder: 1
+//retry:
+//retryAspectOrder: 2
